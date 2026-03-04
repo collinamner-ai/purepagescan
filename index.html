@@ -565,6 +565,14 @@
     }
     .accordion-content.active { display: block; }
     .accordion-content p { margin: 0 0 8px 0; font-size: 13px; line-height: 1.6; }
+
+    .accordion-arrow { display: inline-block; transition: transform 0.3s ease; color: var(--primary); font-weight: bold; }
+    .accordion-header.active .accordion-arrow { transform: rotate(90deg); }
+
+    .settings-footer { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+    .purescan-logo { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; }
+    .purescan-logo svg { width: 100%; height: 100%; stroke: var(--primary); fill: none; stroke-width: 1.5; }
+    .settings-footer-text { font-size: 13px; font-weight: 600; color: var(--primary); }
   </style>
 </head>
 <body>
@@ -583,15 +591,15 @@
       <div class="onboard-steps">
         <div class="onboard-step">
           <div class="onboard-icon"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-          <div class="onboard-text"><h3>1. Capture</h3><p>Tap blue button to scan pages</p></div>
+          <div class="onboard-text"><h3>Capture</h3><p>Tap to Scan button to scan pages</p></div>
         </div>
         <div class="onboard-step">
           <div class="onboard-icon"><svg viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div>
-          <div class="onboard-text"><h3>2. Review</h3><p>Review and delete bad pages</p></div>
+          <div class="onboard-text"><h3>Review</h3><p>Review, enhance and add additional images</p></div>
         </div>
         <div class="onboard-step">
           <div class="onboard-icon"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
-          <div class="onboard-text"><h3>3. Save</h3><p>Choose folder and export PDF</p></div>
+          <div class="onboard-text"><h3>Save</h3><p>Choose folder and export PDF</p></div>
         </div>
       </div>
       <div class="onboard-footer">
@@ -808,9 +816,9 @@
         <button class="header-btn" style="visibility: hidden;"></button>
       </header>
       <main>
-        <button class="btn" style="width: 100%; justify-content: space-between;" id="help-btn"><span>Help</span><span>›</span></button>
+        <button class="btn" style="width: 100%; justify-content: flex-start;" id="help-btn"><span>Help</span></button>
         <div class="accordion-item">
-          <button class="accordion-header" id="about-btn"><span>About</span><span id="about-toggle">›</span></button>
+          <button class="accordion-header" id="about-btn"><span>About</span><span class="accordion-arrow" id="about-toggle">›</span></button>
           <div class="accordion-content" id="about-content">
             <p><strong>PureScan</strong></p>
             <p>Version 1.0 SPK0.0</p>
@@ -819,6 +827,10 @@
           </div>
         </div>
         <div style="margin-top: 24px; padding: 16px; background: #f0f5ff; border-radius: 8px; color: var(--text-secondary); font-size: 13px;"><strong>100% Private:</strong> Files stay on device.</div>
+        <div class="settings-footer">
+          <div class="purescan-logo"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div class="settings-footer-text">PureScan</div>
+        </div>
       </main>
     </section>
   </div>
@@ -897,7 +909,7 @@ document.getElementById("saturation-slider").oninput=(e)=>{document.getElementBy
 document.getElementById("camera-back").onclick=()=>{stopCamera();show("home-screen");};
 document.getElementById("settings-btn").onclick=()=>show("settings-screen");
 document.getElementById("help-btn").onclick=()=>{showOnboarding(true);};
-document.getElementById("about-btn").onclick=()=>{const content=document.getElementById("about-content");const header=document.getElementById("about-btn");const toggle=document.getElementById("about-toggle");content.classList.toggle("active");header.classList.toggle("active");toggle.textContent=content.classList.contains("active")?"v":"›";};
+document.getElementById("about-btn").onclick=()=>{const content=document.getElementById("about-content");const header=document.getElementById("about-btn");content.classList.toggle("active");header.classList.toggle("active");};
 document.getElementById("onboard-start").onclick=closeOnboarding;
 document.getElementById("onboard-close").onclick=closeOnboarding;
 document.getElementById("onboard-settings-back").onclick=closeOnboarding;
